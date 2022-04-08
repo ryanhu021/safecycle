@@ -7,7 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "prettier": "npx prettier --check .",
+    "lint": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" && prettier . --check",
+    "lint-fix": "eslint \"{,!(node_modules)/**/}*.{js,jsx}\" --fix && prettier . --write"
   },
   "dependencies": {
     "expo": "~44.0.0",
@@ -18,7 +21,17 @@
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "eslint-plugin-react-native": "^4.0.0",
+    "prettier": "^2.6.2"
   },
   "private": true
 }
