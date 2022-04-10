@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Dimensions, View, Text } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
 import { withTheme } from "react-native-paper";
 import MapView, { Polyline, Circle, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
@@ -8,7 +8,7 @@ function mapComponent() {
   const styles = StyleSheet.create({
     map: {
       width: Dimensions.get("window").width,
-      height: Dimensions.get("window").height * 0.8,
+      height: Dimensions.get("window").height,
     },
   });
 
@@ -89,7 +89,6 @@ function mapComponent() {
           fillColor="#000"
         />
       </MapView>
-      <Text>{location.coords.latitude}</Text>
     </View>
   );
 }
