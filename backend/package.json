@@ -26,6 +26,7 @@
     "geolib": "^3.3.3",
     "haversine": "^1.1.1",
     "mongoose": "^6.2.10",
+    "ngeohash": "^0.6.3",
     "query-overpass": "^1.5.5"
   }
 }
