@@ -276,26 +276,33 @@ const buildPath = (start, end, graph) => {
   let cur = end;
   while (cur !== start) {
     const point = graph.get(cur);
-    path.push({ latitude: point.lat, longitude: point.long });
+    // path.push({ latitude: point.lat, longitude: point.long });
+    path.push(point.lat, point.long);
     cur = prev.get(cur);
   }
   const point = graph.get(cur);
-  path.push({ latitude: point.lat, longtiude: point.long });
+  // path.push({ latitude: point.lat, longtiude: point.long });
+  path.push(point.lat, point.long);
   return path;
 };
 
 // GET - get path coordinates for safest path
-router.get("/safest", async (req, res) => {
+router.post("/safest", async (req, res) => {
   const { lat1, long1, lat2, long2 } = req.body;
+  console.log("posting");
 
   // get geoJSON for all paths
   const allPathsGeoJSON = await getAllPathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
-  );
+  ).catch(() => {
+    res.sendStatus(500);
+  });
   // get geoJSON for bike paths
   const bikePathsGeoJSON = await getBikePathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
-  );
+  ).catch(() => {
+    res.sendStatus(500);
+  });
   // build all paths and bike paths graphs
   const allPaths = buildGraph(allPathsGeoJSON);
   const bikePaths = buildGraph(bikePathsGeoJSON);
