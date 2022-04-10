@@ -73,7 +73,7 @@ function homeComponent() {
               console.log(data, details);
             }}
             query={{
-              key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+              key: "",
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
@@ -89,7 +89,7 @@ function homeComponent() {
               console.log(data, details);
             }}
             query={{
-              key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+              key: "",
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
