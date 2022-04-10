@@ -56,7 +56,7 @@ function homeComponent(props) {
           console.log(data, details);
         }}
         query={{
-          key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+          key: "",
           language: "en",
         }}
         keyboardShouldPersistTaps="never"
