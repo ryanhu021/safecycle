@@ -4,6 +4,7 @@ const express = require("express");
 const queryOverpass = require("query-overpass");
 const geolib = require("geolib");
 const geohash = require("ngeohash");
+const haversine = require("haversine");
 
 const router = express.Router();
 
@@ -31,13 +32,29 @@ const buildGraph = (data) => {
       // find adjacent nodes, add to adj array
       if (i > 0) {
         const prevCoordinate = feature.coordinates[i - 1];
+        const prevLat = prevCoordinate[1];
+        const prevLong = prevCoordinate[0];
         const prevId = geohash.encode(prevCoordinate[1], prevCoordinate[0], 9);
-        graph[id].adj.push({ id: prevId });
+        graph[id].adj.push({
+          id: prevId,
+          weight: haversine(
+            { latitude: lat, longitude: long },
+            { latitude: prevLat, longitude: prevLong }
+          ),
+        });
       }
       if (i < feature.coordinates.length - 1) {
         const nextCoordinate = feature.coordinates[i + 1];
+        const nextLat = nextCoordinate[1];
+        const nextLong = nextCoordinate[0];
         const nextId = geohash.encode(nextCoordinate[1], nextCoordinate[0], 9);
-        graph[id].adj.push({ id: nextId });
+        graph[id].adj.push({
+          id: nextId,
+          weight: haversine(
+            { latitude: lat, longitude: long },
+            { latitude: nextLat, longitude: nextLong }
+          ),
+        });
       }
     }
   }
@@ -149,7 +166,6 @@ const getAllPathsGeoJSON = (bounds) => {
   >;
   out skel qt;
   `;
-  console.log(query);
   return new Promise((resolve, reject) => {
     queryOverpass(query, (err, data) => {
       if (err) {
