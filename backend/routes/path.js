@@ -1,4 +1,3 @@
-/* eslint-disable object-shorthand */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 const express = require("express");
@@ -8,35 +7,37 @@ const geohash = require("ngeohash");
 
 const router = express.Router();
 
+// builds graph from .geojson data
 const buildGraph = (data) => {
   const graph = {};
+  // iterate over all objects in features
   for (const f of data.features) {
-    const feature = f.geometry;
+    const feature = f.geometry; // geometry object that holds coordinates array
+    // iterate over coordinates array
     for (let i = 0; i < feature.coordinates.length; i += 1) {
       const coordinate = feature.coordinates[i];
       const long = coordinate[0];
       const lat = coordinate[1];
       const id = geohash.encode(lat, long, 9);
-      graph[id] = {
-        lat: lat,
-        long: long,
-        adj: [],
-      };
-      if (i > 0 && i < feature.coordinates.length - 1) {
+      // create new node in graph
+      graph[id] =
+        typeof graph[id] !== "undefined"
+          ? graph[id]
+          : {
+              lat,
+              long,
+              adj: [],
+            };
+      // find adjacent nodes, add to adj array
+      if (i > 0) {
         const prevCoordinate = feature.coordinates[i - 1];
         const prevId = geohash.encode(prevCoordinate[1], prevCoordinate[0], 9);
-        graph[id].adj.push({ prevId });
+        graph[id].adj.push({ id: prevId });
+      }
+      if (i < feature.coordinates.length - 1) {
         const nextCoordinate = feature.coordinates[i + 1];
         const nextId = geohash.encode(nextCoordinate[1], nextCoordinate[0], 9);
-        graph[id].adj.push({ nextId });
-      } else if (i === 0) {
-        const nextCoordinate = feature.coordinates[i + 1];
-        const nextId = geohash.encode(nextCoordinate[1], nextCoordinate[0], 9);
-        graph[id].adj.push({ nextId });
-      } else if (i === feature.coordinates.length - 1) {
-        const prevCoordinate = feature.coordinates[i - 1];
-        const prevId = geohash.encode(prevCoordinate[1], prevCoordinate[0], 9);
-        graph[id].adj.push({ prevId });
+        graph[id].adj.push({ id: nextId });
       }
     }
   }
@@ -66,6 +67,7 @@ const buildGraph = (data) => {
 //   },
 // };
 
+// returns bounding box of a given start/end point
 const getExpandedBounds = (lat1, long1, lat2, long2) => {
   // NW
   // let westLat, eastLat, southLong, northLong;
@@ -89,6 +91,8 @@ const getExpandedBounds = (lat1, long1, lat2, long2) => {
   // northLong -= 0.01
   // return [westLat, southLong, eastLat, northLong]
   // ADD ALL HEMISPHERE LATER
+  //
+  // call getBounds to return min/max lat/long for bounding box
   const bounds = geolib.getBounds([
     {
       latitude: lat1,
@@ -100,6 +104,7 @@ const getExpandedBounds = (lat1, long1, lat2, long2) => {
     },
   ]);
   return [
+    // increase bounds by 0.01 degrees = 1.11 km
     bounds.minLat - 0.01,
     bounds.minLng - 0.01,
     bounds.maxLat + 0.01,
@@ -107,6 +112,7 @@ const getExpandedBounds = (lat1, long1, lat2, long2) => {
   ];
 };
 
+// returns all paths within bounding box (including unsafe roads)
 const getAllPathsGeoJSON = (bounds) => {
   const query = `
   /*
@@ -143,6 +149,7 @@ const getAllPathsGeoJSON = (bounds) => {
   >;
   out skel qt;
   `;
+  console.log(query);
   return new Promise((resolve, reject) => {
     queryOverpass(query, (err, data) => {
       if (err) {
@@ -153,6 +160,7 @@ const getAllPathsGeoJSON = (bounds) => {
   });
 };
 
+// returns cycling paths within bounding box (excluding unsafe roads)
 const getBikePathsGeoJSON = async (bounds) => {
   const query = `
   /*
@@ -194,11 +202,12 @@ const getBikePathsGeoJSON = async (bounds) => {
 router.get("/safest", async (req, res) => {
   const { lat1, long1, lat2, long2 } = req.body;
 
-  // build graph
+  // build graph for all paths
   const allPathsGeoJSON = await getAllPathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   );
   res.send(buildGraph(allPathsGeoJSON));
+  // build graph for cycling / safe paths
   const bikePathsGeoJSON = await getBikePathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   );
