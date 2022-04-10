@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 //   alert("hello!");
 // }
 
-function homeComponent() {
+function homeComponent({ navigation }) {
   const [textFrom, setTextFrom] = React.useState("From:");
   const [currCoords, setCurrCoords] = React.useState({
     latitude: 0,
@@ -72,7 +72,7 @@ function homeComponent() {
       setCurrCoords(loc.coords);
     })();
   }, []);
-  
+
   const onSubmit = () => {
     navigation.navigate("Map");
   };
