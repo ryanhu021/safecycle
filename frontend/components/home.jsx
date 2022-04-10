@@ -4,7 +4,6 @@ import { Headline, withTheme, Button } from "react-native-paper";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 // eslint-disable-next-line no-undef
-// navigator.geolocation = require("react-native-geolocation-service");
 
 const styles = StyleSheet.create({
   container: {
