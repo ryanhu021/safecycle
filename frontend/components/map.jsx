@@ -4,7 +4,9 @@ import { withTheme } from "react-native-paper";
 import MapView, { Polyline, Circle, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 
-function mapComponent() {
+function mapComponent({ route }) {
+  const { coordinates } = route.params;
+
   const styles = StyleSheet.create({
     map: {
       width: Dimensions.get("window").width,
@@ -12,33 +14,31 @@ function mapComponent() {
     },
   });
 
-  const [coordinates, setCoordinates] = useState([]);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    fetch("http://10.40.7.111:3001/path/safest", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        lat1: 35.297896,
-        long1: -120.665505,
-        lat2: 35.288657,
-        long2: -120.651738,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const coords = [];
-        for (let i = 0; i < data.length; i += 2) {
-          coords.push({ latitude: data[i], longitude: data[i + 1] });
-        }
-        setCoordinates(coords);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-undef
+  //   fetch("http://10.40.7.111:3001/path/safest", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       lat1: 35.297896,
+  //       long1: -120.665505,
+  //       lat2: 35.288657,
+  //       long2: -120.651738,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const coords = [];
+  //       for (let i = 0; i < data.length; i += 2) {
+  //         coords.push({ latitude: data[i], longitude: data[i + 1] });
+  //       }
+  //       setCoordinates(coords);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const [location, setLocation] = useState({
     coords: { latitude: 0, longitude: 0 },
