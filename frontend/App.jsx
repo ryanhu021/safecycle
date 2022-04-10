@@ -2,6 +2,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./components/home";
+// eslint-disable-next-line import/no-named-as-default
 import Map from "./components/map";
 
 const Stack = createNativeStackNavigator();
