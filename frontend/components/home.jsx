@@ -67,9 +67,7 @@ function homeComponent({ navigation }) {
         resizeMode="cover"
         style={styles.image}
       >
-        <Headline adjustsFontSizeToFit="true" style={styles.headerBox}>
-          SafeCycle
-        </Headline>
+        <Headline style={styles.headerBox}>SafeCycle</Headline>
         <View style={styles.input}>
           <GooglePlacesAutocomplete
             placeholder="From:"
@@ -83,7 +81,6 @@ function homeComponent({ navigation }) {
             }}
             keyboardShouldPersistTaps="never"
             enablePoweredByContainer={false}
-            listViewDisplayed="true"
           />
         </View>
         <View style={styles.input} marginBottom="50%">
