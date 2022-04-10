@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, View, Keyboard } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Headline, withTheme, Button } from "react-native-paper";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-import Placesearch from "react-native-placesearch";
+// eslint-disable-next-line no-undef
 
 const styles = StyleSheet.create({
   container: {
@@ -33,21 +34,33 @@ function homeComponent(props) {
   return (
     <View style={styles.container}>
       <Headline style={{ color: colors.myOwnColor }}>SafeCycle</Headline>
-      <Placesearch
-        apikey="" // required *
-        SelectedAddress={(data) => console.log(data)} // required *
-        onClose={() => Keyboard.dismiss()}
-        // country ="country code" //optional
-        // coordinate={true} //optional
-        removeImg
+      <Text>From</Text>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+        }}
+        query={{
+          key: "",
+          language: "en",
+        }}
+        keyboardShouldPersistTaps="never"
+        enablePoweredByContainer={false}
       />
-      <Placesearch
-        apikey="" // required *
-        SelectedAddress={(data) => console.log(data)} // required *
-        onClose={() => Keyboard.dismiss()}
-        // country ="country code" //optional
-        // coordinate={true} //optional
-        removeImg
+      <Text>To</Text>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+        }}
+        query={{
+          key: "",
+          language: "en",
+        }}
+        keyboardShouldPersistTaps="never"
+        enablePoweredByContainer={false}
       />
       <Button
         onPress={() => {
