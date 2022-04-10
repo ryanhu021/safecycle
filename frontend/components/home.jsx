@@ -47,7 +47,7 @@ function homeComponent() {
       <View style={styles.input}>
         <Placesearch
           placeHolder="From:"
-          apikey="AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU" // required *
+          apikey="" // required *
           SelectedAddress={(data) => console.log(data)} // required *
           onClose={() => Keyboard.dismiss()}
           // country ="country code" //optional
@@ -59,7 +59,7 @@ function homeComponent() {
       <View style={styles.input}>
         <Placesearch
           placeHolder="To:"
-          apikey="AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU" // required *
+          apikey="" // required *
           // SelectedAddress={(data) => console.log(data)} // required *
           SelectedAddress={textTo} // required *
           // eslint-disable-next-line no-shadow
