@@ -1,5 +1,6 @@
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import Home from "./components/home";
+// import Home from "./components/home";
+import Map from "./components/map";
 
 const theme = {
   ...DefaultTheme,
@@ -17,7 +18,7 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <Home />
+      <Map />
     </PaperProvider>
   );
 }
