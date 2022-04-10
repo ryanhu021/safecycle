@@ -5,50 +5,72 @@ import { Headline, withTheme, Button } from "react-native-paper";
 import Placesearch from "react-native-placesearch";
 
 const styles = StyleSheet.create({
+  headerBox: {
+    color: "black",
+    paddingBottom: 20,
+    marginLeft: "35%",
+  },
   container: {
-    borderTopWidth: 45,
+    backgroundColor: "white",
+    alignItems: "flex-start",
+    justifyContent: "center",
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "flex-start",
   },
   input: {
+    minHeight: "15%",
+    minWidth: "100%",
     backgroundColor: "white",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
   },
   button: {
     backgroundColor: "green",
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 10,
+    minWidth: "100%",
   },
 });
 
-function homeComponent(props) {
-  //   const [textFrom, setTextFrom] = React.useState("");
-  //   const [textTo, setTextTo] = React.useState("");
-  const { colors } = props.theme;
+// function onSelectedFrom() {
+//   // eslint-disable-next-line no-alert
+//   // eslint-disable-next-line no-undef
+//   alert("hello!");
+// }
 
+function homeComponent() {
+  // const [textFrom, setTextFrom] = React.useState("");
+  const [textTo, setTextTo] = React.useState("");
   return (
     <View style={styles.container}>
-      <Headline style={{ color: colors.myOwnColor }}>SafeCycle</Headline>
-      <Placesearch
-        apikey="" // required *
-        SelectedAddress={(data) => console.log(data)} // required *
-        onClose={() => Keyboard.dismiss()}
-        // country ="country code" //optional
-        // coordinate={true} //optional
-        removeImg
-      />
-      <Placesearch
-        apikey="" // required *
-        SelectedAddress={(data) => console.log(data)} // required *
-        onClose={() => Keyboard.dismiss()}
-        // country ="country code" //optional
-        // coordinate={true} //optional
-        removeImg
-      />
+      <Headline adjustsFontSizeToFit="true" style={styles.headerBox}>
+        SafeCycle
+      </Headline>
+      <View style={styles.input}>
+        <Placesearch
+          placeHolder="From:"
+          apikey="AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU" // required *
+          SelectedAddress={(data) => console.log(data)} // required *
+          onClose={() => Keyboard.dismiss()}
+          // country ="country code" //optional
+          // coordinate={true} //optional
+          removeImg
+          borderColor="black"
+        />
+      </View>
+      <View style={styles.input}>
+        <Placesearch
+          placeHolder="To:"
+          apikey="AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU" // required *
+          // SelectedAddress={(data) => console.log(data)} // required *
+          SelectedAddress={textTo} // required *
+          // eslint-disable-next-line no-shadow
+          onChangeText={(textTo) => setTextTo(textTo)}
+          onClose={() => Keyboard.dismiss()}
+          // country ="country code" //optional
+          // coordinate={true} //optional
+          removeImg
+          borderColor="black"
+        />
+      </View>
       <Button
         onPress={() => {
           // eslint-disable-next-line no-alert
