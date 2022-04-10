@@ -1,8 +1,50 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 const express = require("express");
 const queryOverpass = require("query-overpass");
 const geolib = require("geolib");
+const geohash = require("ngeohash");
 
 const router = express.Router();
+
+const buildGraph = (data) => {
+  const graph = {};
+  for (const f of data.features) {
+    const feature = f.geometry;
+    for (let i = 0; i < feature.coordinates.length; i += 1) {
+      const coordinate = feature.coordinates[i];
+      const long = coordinate[0];
+      const lat = coordinate[1];
+      const id = geohash.encode(lat, long, 9);
+      graph[id] = {
+        lat: lat,
+        long: long,
+        adj: [],
+      };
+      if (i > 0 && i < feature.coordinates.length - 1) {
+        const prevCoordinate = feature.coordinates[i - 1];
+        const prevId = geohash.encode(prevCoordinate[1], prevCoordinate[0], 9);
+        graph[id].adj.push({ prevId });
+        const nextCoordinate = feature.coordinates[i + 1];
+        const nextId = geohash.encode(nextCoordinate[1], nextCoordinate[0], 9);
+        graph[id].adj.push({ nextId });
+      } else if (i === 0) {
+        const nextCoordinate = feature.coordinates[i + 1];
+        const nextId = geohash.encode(nextCoordinate[1], nextCoordinate[0], 9);
+        graph[id].adj.push({ nextId });
+      } else if (i === feature.coordinates.length - 1) {
+        const prevCoordinate = feature.coordinates[i - 1];
+        const prevId = geohash.encode(prevCoordinate[1], prevCoordinate[0], 9);
+        graph[id].adj.push({ prevId });
+      }
+    }
+  }
+  return graph;
+};
+
+// const adjId = geohash.encode(adj[0], adj[1], 9);
+// graph[id].adj.push({id: adjId});
 
 // const graph = {
 //   123: {
@@ -156,7 +198,7 @@ router.get("/safest", async (req, res) => {
   const allPathsGeoJSON = await getAllPathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   );
-  res.send(allPathsGeoJSON);
+  res.send(buildGraph(allPathsGeoJSON));
   const bikePathsGeoJSON = await getBikePathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   );
