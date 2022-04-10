@@ -6,62 +6,77 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 // eslint-disable-next-line no-undef
 
 const styles = StyleSheet.create({
+  headerBox: {
+    color: "black",
+    paddingBottom: 20,
+    marginLeft: "35%",
+  },
   container: {
-    borderTopWidth: 45,
+    backgroundColor: "white",
+    alignItems: "flex-start",
+    justifyContent: "center",
     flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "flex-start",
   },
   input: {
+    minHeight: "15%",
+    minWidth: "100%",
     backgroundColor: "white",
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 10,
   },
   button: {
     backgroundColor: "green",
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 10,
+    minWidth: "100%",
   },
 });
 
-function homeComponent(props) {
-  //   const [textFrom, setTextFrom] = React.useState("");
-  //   const [textTo, setTextTo] = React.useState("");
-  const { colors } = props.theme;
+// function onSelectedFrom() {
+//   // eslint-disable-next-line no-alert
+//   // eslint-disable-next-line no-undef
+//   alert("hello!");
+// }
 
+function homeComponent() {
+  // const [textFrom, setTextFrom] = React.useState("");
+  // const [textTo, setTextTo] = React.useState("");
   return (
     <View style={styles.container}>
-      <Headline style={{ color: colors.myOwnColor }}>SafeCycle</Headline>
-      <Text>From</Text>
-      <GooglePlacesAutocomplete
-        placeholder="Search"
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log(data, details);
-        }}
-        query={{
-          key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
-          language: "en",
-        }}
-        keyboardShouldPersistTaps="never"
-        enablePoweredByContainer={false}
-      />
-      <Text>To</Text>
-      <GooglePlacesAutocomplete
-        placeholder="Search"
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log(data, details);
-        }}
-        query={{
-          key: "",
-          language: "en",
-        }}
-        keyboardShouldPersistTaps="never"
-        enablePoweredByContainer={false}
-      />
+      <Headline adjustsFontSizeToFit="true" style={styles.headerBox}>
+        SafeCycle
+      </Headline>
+      <View style={styles.input}>
+        <Text>From</Text>
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+            language: "en",
+          }}
+          keyboardShouldPersistTaps="never"
+          enablePoweredByContainer={false}
+        />
+      </View>
+      <View style={styles.input}>
+        <Text>To</Text>
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: "",
+            language: "en",
+          }}
+          keyboardShouldPersistTaps="never"
+          enablePoweredByContainer={false}
+        />
+      </View>
       <Button
         onPress={() => {
           // eslint-disable-next-line no-alert
