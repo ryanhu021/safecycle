@@ -85,7 +85,7 @@ function homeComponent({ navigation }) {
         resizeMode="cover"
         style={styles.image}
       >
-        <Headline adjustsFontSizeToFit="true" style={styles.headerBox}>
+        <Headline style={styles.headerBox}>SafeCycle</Headline>
           SafeCycle
         </Headline>
         <Button
@@ -114,7 +114,6 @@ function homeComponent({ navigation }) {
             }}
             keyboardShouldPersistTaps="never"
             enablePoweredByContainer={false}
-            listViewDisplayed="true"
           />
         </View>
         <View style={styles.input} marginBottom="50%">
