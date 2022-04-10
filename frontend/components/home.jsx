@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 function homeComponent() {
   // const [textFrom, setTextFrom] = React.useState("");
-  const [textTo, setTextTo] = React.useState("");
+  // const [textTo, setTextTo] = React.useState("");
   return (
     <View style={styles.container}>
       <Headline adjustsFontSizeToFit="true" style={styles.headerBox}>
