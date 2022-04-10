@@ -74,7 +74,29 @@ function homeComponent({ navigation }) {
   }, []);
 
   const onSubmit = () => {
-    navigation.navigate("Map");
+    // eslint-disable-next-line no-undef
+    fetch("http://10.40.7.111:3001/path/safest", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        lat1: fromCoords.latitude,
+        long1: fromCoords.longitude,
+        lat2: toCoords.latitude,
+        long2: toCoords.longitude,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const coords = [];
+        for (let i = 0; i < data.length; i += 2) {
+          coords.push({ latitude: data[i], longitude: data[i + 1] });
+        }
+        navigation.navigate("Map", { coordinates: coords });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -86,8 +108,6 @@ function homeComponent({ navigation }) {
         style={styles.image}
       >
         <Headline style={styles.headerBox}>SafeCycle</Headline>
-          SafeCycle
-        </Headline>
         <Button
           mode="contained"
           style={styles.button}
@@ -138,15 +158,12 @@ function homeComponent({ navigation }) {
           onPress={() => {
             // eslint-disable-next-line no-alert
             // eslint-disable-next-line no-undef
-            alert(
-              `${fromCoords.latitude}, ${fromCoords.longitude}\n${toCoords.latitude}, ${toCoords.longitude}`
-            );
             onSubmit();
           }}
           mode="contained"
           style={styles.button}
         >
-          Search Address
+          Find Route
         </Button>
       </ImageBackground>
     </View>
