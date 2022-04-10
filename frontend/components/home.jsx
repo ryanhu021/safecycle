@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
-import { Headline, withTheme, Button } from "react-native-paper";
+import {
+  Headline,
+  withTheme,
+  Button,
+  ActivityIndicator,
+} from "react-native-paper";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import * as Location from "expo-location";
 import image from "../homeBackground.png";
@@ -44,6 +49,10 @@ const styles = StyleSheet.create({
     maxWidth: "95%",
     marginLeft: "5%",
   },
+  loading: {
+    marginLeft: "5%",
+    marginBottom: "5%",
+  },
 });
 
 // function onPress() {
@@ -73,9 +82,12 @@ function homeComponent({ navigation }) {
     })();
   }, []);
 
+  const [clicked, setClicked] = useState(false);
+
   const onSubmit = () => {
+    setClicked(true);
     // eslint-disable-next-line no-undef
-    fetch("http://10.40.7.111:3001/path/safest", {
+    fetch("http://10.151.54.83:3001/path/safest", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -95,6 +107,7 @@ function homeComponent({ navigation }) {
           coords.push({ latitude: data[i], longitude: data[i + 1] });
         }
         navigation.navigate("Map", { coordinates: coords });
+        setClicked(false);
       })
       .catch((err) => console.log(err));
   };
@@ -129,7 +142,7 @@ function homeComponent({ navigation }) {
               });
             }}
             query={{
-              key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+              key: "",
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
@@ -147,24 +160,29 @@ function homeComponent({ navigation }) {
               });
             }}
             query={{
-              key: "AIzaSyDfsDvdwRAW2caHnBK8o70vZX5y9POlFqU",
+              key: "",
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
             enablePoweredByContainer={false}
           />
         </View>
-        <Button
-          onPress={() => {
-            // eslint-disable-next-line no-alert
-            // eslint-disable-next-line no-undef
-            onSubmit();
-          }}
-          mode="contained"
-          style={styles.button}
-        >
-          Find Route
-        </Button>
+        {/* display ActivityIndicator if clicked is true */}
+        {clicked ? (
+          <ActivityIndicator style={styles.loading} size="large" />
+        ) : (
+          <Button
+            onPress={() => {
+              // eslint-disable-next-line no-alert
+              // eslint-disable-next-line no-undef
+              onSubmit();
+            }}
+            mode="contained"
+            style={styles.button}
+          >
+            Find Route
+          </Button>
+        )}
       </ImageBackground>
     </View>
   );

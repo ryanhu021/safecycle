@@ -62,11 +62,12 @@ function mapComponent({ route }) {
       <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
-        // initialRegion={{
-
-        //   latitudeDelta: LATITUDE_DELTA,
-        //   longitudeDelta: LONGITUDE_DELTA,
-        // }}
+        region={{
+          latitude: coordinates[coordinates.length - 1].latitude,
+          longitude: coordinates[coordinates.length - 1].longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }}
       >
         <Polyline
           coordinates={coordinates}
