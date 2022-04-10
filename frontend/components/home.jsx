@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// function onSelectedFrom() {
+// function onPress() {
 //   // eslint-disable-next-line no-alert
 //   // eslint-disable-next-line no-undef
 //   alert("hello!");
@@ -72,6 +72,10 @@ function homeComponent() {
       setCurrCoords(loc.coords);
     })();
   }, []);
+  
+  const onSubmit = () => {
+    navigation.navigate("Map");
+  };
 
   return (
     <View style={styles.container}>
@@ -138,6 +142,7 @@ function homeComponent() {
             alert(
               `${fromCoords.latitude}, ${fromCoords.longitude}\n${toCoords.latitude}, ${toCoords.longitude}`
             );
+            onSubmit();
           }}
           mode="contained"
           style={styles.button}
