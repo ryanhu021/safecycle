@@ -45,15 +45,20 @@ const styles = StyleSheet.create({
   },
 });
 
-// function onSelectedFrom() {
+// function onPress() {
 //   // eslint-disable-next-line no-alert
 //   // eslint-disable-next-line no-undef
 //   alert("hello!");
 // }
 
-function homeComponent() {
+function homeComponent({ navigation }) {
   // const [textFrom, setTextFrom] = React.useState("");
   // const [textTo, setTextTo] = React.useState("");
+
+  const onSubmit = () => {
+    navigation.navigate("Map");
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -100,7 +105,7 @@ function homeComponent() {
           onPress={() => {
             // eslint-disable-next-line no-alert
             // eslint-disable-next-line no-undef
-            alert("You tapped the button!");
+            onSubmit();
           }}
           mode="contained"
           style={styles.button}
