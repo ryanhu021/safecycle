@@ -95,6 +95,7 @@ const getAllPathsGeoJSON = (bounds) => {
   >;
   out skel qt;
   `;
+  console.log(query);
   return new Promise((resolve, reject) => {
     queryOverpass(query, (err, data) => {
       if (err) {
@@ -297,29 +298,46 @@ router.post("/safest", async (req, res) => {
   ).catch(() => {
     res.sendStatus(500);
   });
+  console.log("got all paths");
   // get geoJSON for bike paths
   const bikePathsGeoJSON = await getBikePathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   ).catch(() => {
     res.sendStatus(500);
   });
+  console.log("got bike paths");
   // build all paths and bike paths graphs
   const allPaths = buildGraph(allPathsGeoJSON);
+  console.log("built all paths");
   const bikePaths = buildGraph(bikePathsGeoJSON);
+  console.log("built bike paths");
   // get the nearest points from the start and end coordinates
   const startPoint = findNearestPoint(lat1, long1, allPaths);
+  console.log("found start point");
   const endPoint = findNearestPoint(lat2, long2, allPaths);
+  console.log("found end point");
   // hash points
   const start = geohash.encode(startPoint.lat, startPoint.long, 9);
+  console.log("hashed start point");
   const end = geohash.encode(endPoint.lat, endPoint.long, 9);
+  console.log("hashed end point");
   // reduce weight of bike path edge on all paths graph
+  console.log(allPaths.count());
   reduceSafeWeights(start, allPaths, bikePaths);
+  console.log("reduced weights");
+  console.log(allPaths.count());
   // build final path with all paths graph
-  const path = buildPath(start, end, allPaths);
-  if (!path) {
+  try {
+    const path = buildPath(start, end, allPaths);
+    console.log("built final path");
+    path.forEach((coordinate) => {
+      console.log(coordinate);
+    });
+    res.send(path);
+  } catch (err) {
+    console.log(err);
     res.sendStatus(500);
   }
-  res.send(path);
 
   // find safest path based on graph
 
