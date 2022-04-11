@@ -87,7 +87,7 @@ function homeComponent({ navigation }) {
   const onSubmit = () => {
     setClicked(true);
     // eslint-disable-next-line no-undef
-    fetch("http://10.151.54.83:3001/path/safest", {
+    fetch("https://safecycle-backend.herokuapp.com/path/safest", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -106,8 +106,8 @@ function homeComponent({ navigation }) {
         for (let i = 0; i < data.length; i += 2) {
           coords.push({ latitude: data[i], longitude: data[i + 1] });
         }
-        navigation.navigate("Map", { coordinates: coords });
         setClicked(false);
+        navigation.navigate("Map", { coordinates: coords });
       })
       .catch((err) => console.log(err));
   };
