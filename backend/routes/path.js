@@ -62,32 +62,32 @@ const getExpandedBounds = (lat1, long1, lat2, long2) => {
 const getAllPathsGeoJSON = (bounds) => {
   const query = `
   [out:json];
-  
+
   (
     // get cycle route relations
-    relation[route=bicycle](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    relation[route=bicycle][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
     // get cycleways
-    way[cycleway=lane](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[cycleway=track](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=cycleway](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=path][bicycle=designated](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=path][bicycle=yes](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=footway][bicycle=designated](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=footway][bicycle=yes](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=living_street][bicycle=yes](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=residential][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    
-    
-    // unsafe
-    way[highway=secondary][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=secondary_link][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=tertiary][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=tertiary_link][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=track][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=service][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=unclassified][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[cycleway=lane][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[cycleway=track][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=cycleway][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=path][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=path][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=footway][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=footway][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=living_street][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=residential][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+
+
+    // less safe
+    way[highway=secondary][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=secondary_link][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=tertiary][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=tertiary_link][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=track][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=service][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=unclassified][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
   );
-  
+
   out body;
   >;
   out skel qt;
@@ -110,17 +110,17 @@ const getBikePathsGeoJSON = async (bounds) => {
   
   (
     // get cycle route relations
-    relation[route=bicycle](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    relation[route=bicycle][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
     // get cycleways
-    way[cycleway=lane](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[cycleway=track](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=cycleway](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=path][bicycle=designated](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=path][bicycle=yes](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=footway][bicycle=designated](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=footway][bicycle=yes](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=residential][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
-    way[highway=living_street][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[cycleway=lane][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[cycleway=track][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=cycleway][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=path][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=path][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=footway][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=footway][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=living_street][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=residential][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
   );
   
   out body;
@@ -322,8 +322,13 @@ router.post("/safest", async (req, res) => {
   // build final path with all paths graph
   try {
     const path = buildPath(start, end, allPaths);
-    console.log("built final path");
-    res.send(path);
+    if (!path || path.length === 0) {
+      console.log("no path found");
+      res.sendStatus(500);
+    } else {
+      console.log("built final path");
+      res.send(path);
+    }
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
