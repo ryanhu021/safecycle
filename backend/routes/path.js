@@ -65,27 +65,27 @@ const getAllPathsGeoJSON = (bounds) => {
 
   (
     // get cycle route relations
-    relation[route=bicycle][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    relation[route=bicycle][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
     // get cycleways
-    way[cycleway=lane][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[cycleway=track][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=cycleway][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=path][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=path][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=footway][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=footway][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=living_street][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=residential][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[cycleway=lane][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[cycleway=track][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=cycleway][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=path][bicycle=designated][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=path][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=footway][bicycle=designated][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=footway][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=living_street][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=residential][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
 
 
     // less safe
-    way[highway=secondary][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=secondary_link][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=tertiary][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=tertiary_link][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=track][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=service][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=unclassified][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[highway=secondary][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=secondary_link][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=tertiary][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=tertiary_link][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=track][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=service][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=unclassified][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
   );
 
   out body;
@@ -110,17 +110,17 @@ const getBikePathsGeoJSON = async (bounds) => {
   
   (
     // get cycle route relations
-    relation[route=bicycle][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    relation[route=bicycle][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
     // get cycleways
-    way[cycleway=lane][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[cycleway=track][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=cycleway][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=path][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=path][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=footway][bicycle=designated][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=footway][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=living_street][bicycle=yes][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
-    way[highway=residential][bicycle!=no][access!=no](47.5412589, -122.0627061, 47.5955508, -122.01903349999999);
+    way[cycleway=lane][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[cycleway=track][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=cycleway][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=path][bicycle=designated][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=path][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=footway][bicycle=designated][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=footway][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=living_street][bicycle=yes][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=residential][bicycle!=no][access!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
   );
   
   out body;
