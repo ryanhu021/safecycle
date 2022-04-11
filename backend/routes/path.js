@@ -89,6 +89,7 @@ const getAllPathsGeoJSON = (bounds) => {
     way[highway=tertiary_link][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
     way[highway=track][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
     way[highway=service][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
+    way[highway=unclassified][bicycle!=no](${bounds[0]}, ${bounds[1]}, ${bounds[2]}, ${bounds[3]});
   );
   
   out body;
