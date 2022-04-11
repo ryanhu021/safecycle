@@ -61,10 +61,6 @@ const getExpandedBounds = (lat1, long1, lat2, long2) => {
 // returns all paths within bounding box (including unsafe roads)
 const getAllPathsGeoJSON = (bounds) => {
   const query = `
-  /*
-  This shows the cycleway and cycleroute network.
-  */
-  
   [out:json];
   
   (
@@ -110,10 +106,6 @@ const getAllPathsGeoJSON = (bounds) => {
 // returns cycling paths within bounding box (excluding unsafe roads)
 const getBikePathsGeoJSON = async (bounds) => {
   const query = `
-  /*
-  This shows the cycleway and cycleroute network.
-  */
-  
   [out:json];
   
   (
