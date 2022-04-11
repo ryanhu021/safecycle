@@ -330,9 +330,6 @@ router.post("/safest", async (req, res) => {
   try {
     const path = buildPath(start, end, allPaths);
     console.log("built final path");
-    path.forEach((coordinate) => {
-      console.log(coordinate);
-    });
     res.send(path);
   } catch (err) {
     console.log(err);
