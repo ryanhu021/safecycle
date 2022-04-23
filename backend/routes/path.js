@@ -7,9 +7,8 @@ const queryOverpass = require("query-overpass");
 const geolib = require("geolib");
 const geohash = require("ngeohash");
 const haversine = require("haversine");
-const HashMap = require("hashmap");
-const PriorityQueue = require("priorityqueuejs");
-const Queue = require("@stdlib/utils-fifo");
+const Heap = require("mnemonist/heap");
+const Queue = require("mnemonist/queue");
 
 const router = express.Router();
 
@@ -139,7 +138,7 @@ const getBikePathsGeoJSON = async (bounds) => {
 
 // builds graph from .geojson data
 const buildGraph = (data) => {
-  const graph = new HashMap();
+  const graph = new Map();
   // iterate over all objects in features
   for (const f of data.features) {
     const feature = f.geometry; // geometry object that holds coordinates array
@@ -194,10 +193,10 @@ const buildGraph = (data) => {
 
 const reduceSafeWeights = (start, allPaths, bikePaths) => {
   const q = new Queue();
-  const visited = new HashMap();
-  q.push(start);
-  while (q.length > 0) {
-    const id = q.pop();
+  const visited = new Set();
+  q.enqueue(start);
+  while (q.size > 0) {
+    const id = q.dequeue();
     const cur = allPaths.get(id);
     for (const v of cur.adj) {
       if (bikePaths.has(id) && bikePaths.has(v.id)) {
@@ -207,8 +206,8 @@ const reduceSafeWeights = (start, allPaths, bikePaths) => {
         }
       }
       if (!visited.has(v.id)) {
-        q.push(v.id);
-        visited.set(v.id, null);
+        q.enqueue(v.id);
+        visited.add(v.id);
       }
     }
   }
@@ -237,20 +236,20 @@ const findNearestPoint = (lat, lon, graph) => {
 // start and end are both geohashed using findNearestPoint()
 const buildPath = (start, end, graph) => {
   const path = [];
-  const visited = new HashMap();
-  const dist = new HashMap();
-  const prev = new HashMap();
-  const pq = new PriorityQueue((a, b) => b.dist - a.dist);
+  const visited = new Set();
+  const dist = new Map();
+  const prev = new Map();
+  const pq = new Heap((a, b) => a.dist - b.dist);
   dist.set(start, 0);
   for (const point of graph.keys()) {
     if (point !== start) {
       dist.set(point, Number.MAX_VALUE);
     }
   }
-  pq.enq({ key: start, dist: 0 });
-  while (!pq.isEmpty()) {
-    const cur = pq.deq().key;
-    visited.set(cur, null);
+  pq.push({ key: start, dist: 0 });
+  while (pq.size > 0) {
+    const cur = pq.pop().key;
+    visited.add(cur);
     for (const pair of graph.get(cur).adj) {
       const v = pair.id;
       const { weight } = pair;
@@ -259,7 +258,7 @@ const buildPath = (start, end, graph) => {
         dist.set(v, alt);
         prev.set(v, cur);
         if (!visited.has(v)) {
-          pq.enq({ key: v, dist: alt });
+          pq.push({ key: v, dist: alt });
         }
       }
     }
@@ -286,47 +285,67 @@ router.post("/safest", async (req, res) => {
   console.log("posting");
 
   // get geoJSON for all paths
+  const startTime = Date.now();
   const allPathsGeoJSON = await getAllPathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   ).catch(() => {
     res.sendStatus(500);
   });
-  console.log("got all paths");
+  const time1 = Date.now();
+  console.log(`got all paths in ${time1 - startTime}ms`);
+
   // get geoJSON for bike paths
   const bikePathsGeoJSON = await getBikePathsGeoJSON(
     getExpandedBounds(lat1, long1, lat2, long2)
   ).catch(() => {
     res.sendStatus(500);
   });
-  console.log("got bike paths");
+  const time2 = Date.now();
+  console.log(`got bike paths in ${time2 - time1}ms`);
+
   // build all paths and bike paths graphs
   const allPaths = buildGraph(allPathsGeoJSON);
-  console.log("built all paths");
+  const time3 = Date.now();
+  console.log(`built all paths graph in ${time3 - time2}ms`);
+
   const bikePaths = buildGraph(bikePathsGeoJSON);
-  console.log("built bike paths");
+  const time4 = Date.now();
+  console.log(`built bike paths graph in ${time4 - time3}ms`);
+
   // get the nearest points from the start and end coordinates
   const startPoint = findNearestPoint(lat1, long1, allPaths);
-  console.log("found start point");
+  const time5 = Date.now();
+  console.log(`found start point in ${time5 - time4}ms`);
+
   const endPoint = findNearestPoint(lat2, long2, allPaths);
-  console.log("found end point");
+  const time6 = Date.now();
+  console.log(`found end point in ${time6 - time5}ms`);
+
   // hash points
   const start = geohash.encode(startPoint.lat, startPoint.long, 9);
-  console.log("hashed start point");
+  const time7 = Date.now();
+  console.log(`hashed start point in ${time7 - time6}ms`);
+
   const end = geohash.encode(endPoint.lat, endPoint.long, 9);
-  console.log("hashed end point");
+  const time8 = Date.now();
+  console.log(`hashed end point in ${time8 - time7}ms`);
+
   // reduce weight of bike path edge on all paths graph
-  console.log(allPaths.count());
+  console.log(allPaths.size);
   reduceSafeWeights(start, allPaths, bikePaths);
-  console.log("reduced weights");
-  console.log(allPaths.count());
+  const time9 = Date.now();
+  console.log(`reduced weights in ${time9 - time8}ms`);
+
   // build final path with all paths graph
   try {
     const path = buildPath(start, end, allPaths);
     if (!path || path.length === 0) {
-      console.log("no path found");
+      const time10 = Date.now();
+      console.log(`no path found in ${time10 - time9}ms`);
       res.sendStatus(500);
     } else {
-      console.log("built final path");
+      const time10 = Date.now();
+      console.log(`built final path in ${time10 - time9}ms`);
       res.send(path);
     }
   } catch (err) {
