@@ -87,7 +87,9 @@ function homeComponent({ navigation }) {
   const onSubmit = () => {
     setClicked(true);
     // eslint-disable-next-line no-undef
-    fetch("https://safecycle-backend.herokuapp.com/path/safest", {
+    fetch("http://10.151.75.6:3001/path/safest", {
+      // eslint-disable-next-line no-undef
+      // fetch("https://safecycle-backend.herokuapp.com/path/safest", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -109,7 +111,10 @@ function homeComponent({ navigation }) {
         setClicked(false);
         navigation.navigate("Map", { coordinates: coords });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setClicked(false);
+        console.log(err);
+      });
   };
 
   return (
