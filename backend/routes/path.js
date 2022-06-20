@@ -286,7 +286,7 @@ router.post("/safest", async (req, res) => {
 
   const bbox = getExpandedBounds(lat1, long1, lat2, long2);
   const path = await route(
-    "C:/Users/ryanh/Documents/GitHub/safecycle/backend/data/databases/washington-latest-all.db",
+    "C:/Users/ryanh/Documents/GitHub/safecycle/backend/data/databases/california-latest-all.db",
     { latitude: lat1, longitude: long1 },
     { latitude: lat2, longitude: long2 },
     bbox
