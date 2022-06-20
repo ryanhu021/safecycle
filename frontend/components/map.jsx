@@ -63,8 +63,8 @@ function mapComponent({ route }) {
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         region={{
-          latitude: coordinates[coordinates.length - 1].latitude,
-          longitude: coordinates[coordinates.length - 1].longitude,
+          latitude: coordinates[0].latitude,
+          longitude: coordinates[0].longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}

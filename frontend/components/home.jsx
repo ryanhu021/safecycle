@@ -87,7 +87,7 @@ function homeComponent({ navigation }) {
   const onSubmit = () => {
     setClicked(true);
     // eslint-disable-next-line no-undef
-    fetch("http://10.151.75.6:3001/path/safest", {
+    fetch("http://192.168.1.166:3001/path/safest", {
       // eslint-disable-next-line no-undef
       // fetch("https://safecycle-backend.herokuapp.com/path/safest", {
       method: "POST",
