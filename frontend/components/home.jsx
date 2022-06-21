@@ -88,9 +88,9 @@ function homeComponent({ navigation }) {
   const onSubmit = () => {
     setClicked(true);
     // eslint-disable-next-line no-undef
-    fetch("http://192.168.1.166:3001/bike/safest", {
-      // eslint-disable-next-line no-undef
-      // fetch("https://safecycle-backend.herokuapp.com/path/safest", {
+    // fetch("https://safecycle-api.onrender.com/path/bike", {
+    // eslint-disable-next-line no-undef
+    fetch("https://safecycle-api.herokuapp.com/path/bike", {
       method: "POST",
       headers: {
         Accept: "application/json",
