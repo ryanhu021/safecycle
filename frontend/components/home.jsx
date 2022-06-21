@@ -8,12 +8,13 @@ import {
 } from "react-native-paper";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import * as Location from "expo-location";
+import GHUtil from "graphhopper-js-api-client/src/GHUtil";
 import image from "../homeBackground.png";
 // const image = {
 //   uri: "https://thumbs.dreamstime.com/z/bandung-indonesia-city-map-black-white-color-bandung-indonesia-city-map-black-white-color-outline-map-vector-159720703.jpg",
 // };
 
-// eslint-disable-next-line no-undef
+const ghUtil = new GHUtil();
 
 const styles = StyleSheet.create({
   image: {
@@ -96,18 +97,54 @@ function homeComponent({ navigation }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        lat1: fromCoords.latitude,
-        long1: fromCoords.longitude,
-        lat2: toCoords.latitude,
-        long2: toCoords.longitude,
+        startLat: fromCoords.latitude,
+        startLon: fromCoords.longitude,
+        endLat: toCoords.latitude,
+        endLon: toCoords.longitude,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        const coords = [];
-        for (let i = 0; i < data.length; i += 2) {
-          coords.push({ latitude: data[i], longitude: data[i + 1] });
+        // decode encoded line string (code from GraphHopperRouting.js)
+        if (data.paths) {
+          for (let i = 0; i < data.paths.length; i++) {
+            const path = data.paths[i];
+            // convert encoded polyline to geo json
+            if (path.points_encoded) {
+              const tmpArray = ghUtil.decodePath(path.points, true);
+              path.points = {
+                type: "LineString",
+                coordinates: tmpArray,
+              };
+
+              const tmpSnappedArray = ghUtil.decodePath(
+                path.snapped_waypoints,
+                true
+              );
+              path.snapped_waypoints = {
+                type: "LineString",
+                coordinates: tmpSnappedArray,
+              };
+            }
+            if (path.instructions) {
+              for (let j = 0; j < path.instructions.length; j++) {
+                // Add a LngLat to every instruction
+                const { interval } = path.instructions[j];
+                // The second parameter of slice is non inclusive, therefore we have to add +1
+                path.instructions[j].points = path.points.coordinates.slice([
+                  interval[0],
+                  interval[1] + 1,
+                ]);
+              }
+            }
+          }
         }
+
+        // create coordinates for polyline
+        const coords = [];
+        data.paths[0].points.coordinates.forEach((coord) => {
+          coords.push({ latitude: coord[1], longitude: coord[0] });
+        });
         setClicked(false);
         navigation.navigate("Map", { coordinates: coords });
       })
