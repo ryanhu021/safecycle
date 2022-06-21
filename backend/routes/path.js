@@ -4,8 +4,8 @@ const ghBikeModel = require("../gh_bike_model.json");
 
 const router = express.Router();
 
-// POST - get path coordinates for safest path
-router.post("/safest", async (req, res) => {
+// POST - get path coordinates for safest bike path
+router.post("/bike", async (req, res) => {
   const { startLat, startLon, endLat, endLon } = req.body;
   console.log("posting");
 
