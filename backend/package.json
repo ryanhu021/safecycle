@@ -23,10 +23,10 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "node-fetch": "2.6.7"
+    "node-fetch": "^2.6.7"
   },
-  "engines" : { 
-    "npm" : ">=8.3.0",
-    "node" : ">=16.13.2"
+  "engines": {
+    "npm": ">=8.3.0",
+    "node": ">=16.13.2"
   }
 }
