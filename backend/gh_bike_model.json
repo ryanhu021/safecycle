@@ -1,3 +1,8 @@
 {
-  "priority": []
+  "priority": [
+    {
+      "if": "road_access == NO",
+      "multiply_by": 0
+    }
+  ]
 }
