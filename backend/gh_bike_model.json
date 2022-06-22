@@ -5,7 +5,19 @@
       "multiply_by": 0
     },
     {
-      "if": "road_class != CYCLEWAY && road_class != RESIDENTIAL && road_class != RESIDENTIAL && road_class != LIVING_STREET",
+      "if": "road_class == MOTORWAY",
+      "multiply_by": 0.2
+    },
+    {
+      "else if": "road_class == TRUNK",
+      "multiply_by": 0.4
+    },
+    {
+      "else if": "road_class == PRIMARY",
+      "multiply_by": 0.6
+    },
+    {
+      "else if": "road_class != CYCLEWAY && road_class != RESIDENTIAL && road_class != RESIDENTIAL && road_class != LIVING_STREET",
       "multiply_by": 0.75
     }
   ]
