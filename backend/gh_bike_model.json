@@ -3,6 +3,10 @@
     {
       "if": "road_access == NO",
       "multiply_by": 0
+    },
+    {
+      "if": "road_class == MOTORWAY",
+      "multiply_by": 0.6
     }
   ]
 }
