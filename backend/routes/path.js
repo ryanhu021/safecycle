@@ -27,7 +27,10 @@ router.post("/bike", async (req, res) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => res.json(data))
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
     .catch((err) => {
       console.log(err);
       res.status(400).json({ error: err });
