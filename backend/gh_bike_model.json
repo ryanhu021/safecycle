@@ -6,11 +6,11 @@
     },
     {
       "if": "road_class == MOTORWAY",
-      "multiply_by": 0.1
+      "multiply_by": 0.5
     },
     {
       "if": "road_class == PRIMARY",
-      "multiply_by": 0.5
+      "multiply_by": 0.6
     },
     {
       "if": "road_class != CYCLEWAY && road_class != RESIDENTIAL && road_class != RESIDENTIAL && road_class != LIVING_STREET",
