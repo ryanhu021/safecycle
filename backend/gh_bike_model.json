@@ -1,20 +1,3 @@
 {
-  "priority": [
-    {
-      "if": "road_access == NO",
-      "multiply_by": 0
-    },
-    {
-      "if": "road_class == MOTORWAY",
-      "multiply_by": 0.7
-    },
-    {
-      "if": "road_class == PRIMARY",
-      "multiply_by": 0.7
-    },
-    {
-      "if": "road_class != MOTORWAY && road_class != PRIMARY && road_class != CYCLEWAY && road_class != RESIDENTIAL && road_class != RESIDENTIAL && road_class != LIVING_STREET",
-      "multiply_by": 0.75
-    }
-  ]
+  "priority": []
 }
