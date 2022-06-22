@@ -2,7 +2,7 @@
   "priority": [
     {
       "if": "road_access == NO",
-      "multiply_by": 0
+      "multiply_by": 1
     },
     {
       "if": "road_class == MOTORWAY",
