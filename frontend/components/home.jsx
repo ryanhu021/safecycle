@@ -88,9 +88,7 @@ function homeComponent({ navigation }) {
   const onSubmit = () => {
     setClicked(true);
     // eslint-disable-next-line no-undef
-    // fetch("https://safecycle-api.onrender.com/path/bike", {
-    // eslint-disable-next-line no-undef
-    fetch("https://safecycle-api.herokuapp.com/path/bike", {
+    fetch(process.env.BACKEND_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -184,7 +182,7 @@ function homeComponent({ navigation }) {
               });
             }}
             query={{
-              key: "",
+              key: process.env.GOOGLE_KEY,
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
@@ -202,7 +200,7 @@ function homeComponent({ navigation }) {
               });
             }}
             query={{
-              key: "",
+              key: process.env.GOOGLE_KEY,
               language: "en",
             }}
             keyboardShouldPersistTaps="never"
