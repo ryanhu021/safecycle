@@ -1,0 +1,249 @@
+{
+  "scooter_delivery": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "truck_no_tc": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "small_truck_delivery": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "truck": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "bbox": [-180, -90, 180, 90],
+  "small_truck_no_tc": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "bike": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "import_date": "2022-06-19T19:48:07Z",
+  "scooter_no_tc": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "car": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "encoded_values": {
+    "bike_subnetwork": ["true", "false"],
+    "bike_short_fastest_subnetwork": ["true", "false"],
+    "bike_shortest_subnetwork": ["true", "false"],
+    "foot_subnetwork": ["true", "false"],
+    "foot_short_fastest_subnetwork": ["true", "false"],
+    "foot_shortest_subnetwork": ["true", "false"],
+    "mtb_subnetwork": ["true", "false"],
+    "mtb_short_fastest_subnetwork": ["true", "false"],
+    "mtb_shortest_subnetwork": ["true", "false"],
+    "racingbike_subnetwork": ["true", "false"],
+    "racingbike_short_fastest_subnetwork": ["true", "false"],
+    "racingbike_shortest_subnetwork": ["true", "false"],
+    "hike_subnetwork": ["true", "false"],
+    "hike_short_fastest_subnetwork": ["true", "false"],
+    "hike_shortest_subnetwork": ["true", "false"],
+    "max_speed": [">number", "<number"],
+    "road_class": [
+      "OTHER",
+      "MOTORWAY",
+      "TRUNK",
+      "PRIMARY",
+      "SECONDARY",
+      "TERTIARY",
+      "RESIDENTIAL",
+      "UNCLASSIFIED",
+      "SERVICE",
+      "ROAD",
+      "TRACK",
+      "BRIDLEWAY",
+      "STEPS",
+      "CYCLEWAY",
+      "PATH",
+      "LIVING_STREET",
+      "FOOTWAY",
+      "PEDESTRIAN",
+      "PLATFORM",
+      "CORRIDOR"
+    ],
+    "road_class_link": ["true", "false"],
+    "road_environment": ["OTHER", "ROAD", "FERRY", "TUNNEL", "BRIDGE", "FORD"],
+    "road_access": [
+      "YES",
+      "DESTINATION",
+      "CUSTOMERS",
+      "DELIVERY",
+      "FORESTRY",
+      "AGRICULTURAL",
+      "PRIVATE",
+      "OTHER",
+      "NO"
+    ],
+    "surface": [
+      "MISSING",
+      "PAVED",
+      "ASPHALT",
+      "CONCRETE",
+      "PAVING_STONES",
+      "COBBLESTONE",
+      "UNPAVED",
+      "COMPACTED",
+      "FINE_GRAVEL",
+      "GRAVEL",
+      "GROUND",
+      "DIRT",
+      "GRASS",
+      "SAND",
+      "OTHER"
+    ],
+    "toll": ["MISSING", "NO", "HGV", "ALL"],
+    "max_weight": [">number", "<number"],
+    "max_width": [">number", "<number"],
+    "max_height": [">number", "<number"],
+    "lanes": [">number", "<number"],
+    "roundabout": ["true", "false"],
+    "bike_network": [
+      "MISSING",
+      "INTERNATIONAL",
+      "NATIONAL",
+      "REGIONAL",
+      "LOCAL",
+      "OTHER"
+    ],
+    "get_off_bike": ["true", "false"],
+    "smoothness": [
+      "MISSING",
+      "EXCELLENT",
+      "GOOD",
+      "INTERMEDIATE",
+      "BAD",
+      "VERY_BAD",
+      "HORRIBLE",
+      "VERY_HORRIBLE",
+      "IMPASSABLE",
+      "OTHER"
+    ],
+    "foot_network": [
+      "MISSING",
+      "INTERNATIONAL",
+      "NATIONAL",
+      "REGIONAL",
+      "LOCAL",
+      "OTHER"
+    ],
+    "bike_access": ["true", "false"],
+    "bike_average_speed": [">number", "<number"],
+    "bike_priority": [">number", "<number"],
+    "foot_access": ["true", "false"],
+    "foot_average_speed": [">number", "<number"],
+    "foot_priority": [">number", "<number"],
+    "mtb_access": ["true", "false"],
+    "mtb_average_speed": [">number", "<number"],
+    "mtb_priority": [">number", "<number"],
+    "racingbike_access": ["true", "false"],
+    "racingbike_average_speed": [">number", "<number"],
+    "racingbike_priority": [">number", "<number"],
+    "hike_access": ["true", "false"],
+    "hike_average_speed": [">number", "<number"],
+    "hike_priority": [">number", "<number"],
+    "car_subnetwork": ["true", "false"],
+    "car_no_tc_subnetwork": ["true", "false"],
+    "car_short_fastest_subnetwork": ["true", "false"],
+    "car_short_fastest_no_tc_subnetwork": ["true", "false"],
+    "car_shortest_subnetwork": ["true", "false"],
+    "small_truck_subnetwork": ["true", "false"],
+    "small_truck_no_tc_subnetwork": ["true", "false"],
+    "small_truck_short_fastest_subnetwork": ["true", "false"],
+    "small_truck_short_fastest_no_tc_subnetwork": ["true", "false"],
+    "small_truck_shortest_subnetwork": ["true", "false"],
+    "truck_subnetwork": ["true", "false"],
+    "truck_no_tc_subnetwork": ["true", "false"],
+    "truck_short_fastest_subnetwork": ["true", "false"],
+    "truck_short_fastest_no_tc_subnetwork": ["true", "false"],
+    "truck_shortest_subnetwork": ["true", "false"],
+    "scooter_subnetwork": ["true", "false"],
+    "scooter_no_tc_subnetwork": ["true", "false"],
+    "scooter_short_fastest_subnetwork": ["true", "false"],
+    "scooter_short_fastest_no_tc_subnetwork": ["true", "false"],
+    "scooter_shortest_subnetwork": ["true", "false"],
+    "car_access": ["true", "false"],
+    "car_average_speed": [">number", "<number"],
+    "small_truck_access": ["true", "false"],
+    "small_truck_average_speed": [">number", "<number"],
+    "truck_access": ["true", "false"],
+    "truck_average_speed": [">number", "<number"],
+    "scooter_access": ["true", "false"],
+    "scooter_average_speed": [">number", "<number"],
+    "car_turn_cost": [">number", "<number"],
+    "small_truck_turn_cost": [">number", "<number"],
+    "truck_turn_cost": [">number", "<number"],
+    "scooter_turn_cost": [">number", "<number"]
+  },
+  "car_avoid_motorway": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "mtb": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "racingbike": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "scooter": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "foot": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "elevation": true,
+  "small_truck": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "profiles": [
+    { "name": "bike", "vehicle": "bike" },
+    { "name": "foot", "vehicle": "foot" },
+    { "name": "mtb", "vehicle": "mtb" },
+    { "name": "racingbike", "vehicle": "racingbike" },
+    { "name": "hike", "vehicle": "hike" },
+    { "name": "car", "vehicle": "car" },
+    { "name": "small_truck", "vehicle": "small_truck" },
+    { "name": "truck", "vehicle": "truck" },
+    { "name": "scooter", "vehicle": "scooter" }
+  ],
+  "hike": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+  "car_avoid_ferry": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "car_no_tc": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  },
+  "cp_*": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "car_delivery": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T19:48:07Z"
+  },
+  "car_avoid_toll": {
+    "version": "258c2455c3f030b3d051f1c9503f5a9b186984d2",
+    "import_date": "2022-06-19T13:24:50Z"
+  }
+}
